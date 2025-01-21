@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny 
 
 # Create your views here.
-Class TestView(APIView):
+class TestView(APIView):
     permission_classes = [AllowAny]
     
     def get(self, request):

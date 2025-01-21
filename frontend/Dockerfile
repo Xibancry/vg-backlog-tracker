@@ -1,9 +1,9 @@
-FROM node:16-alpine
+FROM node:18-alpine
 
 WORKDIR /app
-COPY package*.json ./
+COPY package.json package-lock.json* ./
 RUN npm install
 COPY . .
 
-EXPOSE 3000
-CMD ["npm", "start"]
+EXPOSE 5173
+CMD npm run dev -- --host 0.0.0.0  # Added --host flag to allow external access
