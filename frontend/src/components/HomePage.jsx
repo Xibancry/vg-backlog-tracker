@@ -3,35 +3,7 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (
-    <div className="container py-5">
-      {/* Navigation */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">Your Brand</a>
-          <button 
-            className="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link active" href="/">Home</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/about">About</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/contact">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
+    <div className="container-fluid py-5">
       {/* Hero Section */}
       <div className="px-4 py-5 my-5 text-center">
         <h1 className="display-5 fw-bold">Welcome to Your Site</h1>
@@ -87,22 +59,6 @@ function HomePage() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="py-3 my-4">
-        <ul className="nav justify-content-center border-bottom pb-3 mb-3">
-          <li className="nav-item">
-            <a href="/" className="nav-link px-2 text-muted">Home</a>
-          </li>
-          <li className="nav-item">
-            <a href="/about" className="nav-link px-2 text-muted">About</a>
-          </li>
-          <li className="nav-item">
-            <a href="/contact" className="nav-link px-2 text-muted">Contact</a>
-          </li>
-        </ul>
-        <p className="text-center text-muted">© 2025 Your Company, Inc</p>
-      </footer>
     </div>
   );
 }
