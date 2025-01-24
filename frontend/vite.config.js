@@ -7,6 +7,9 @@ export default defineConfig({
   server: {
     host: true,  // Needed for Docker
     port: 5173,  // Default Vite port
+    fs: {
+      cachedChecks: false
+    },
     watch: {
       usePolling: true  // Needed for Docker on some systems
     }
