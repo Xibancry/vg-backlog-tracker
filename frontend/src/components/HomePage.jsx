@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-dom';
+
 
 function HomePage() {
   return (
-    <div className="container-fluid py-5">
+    <div id="HomePage" className="container-fluid py-5">
       {/* Hero Section */}
       <div className="px-4 py-5 my-5 text-center">
         <h1 className="display-5 fw-bold">Welcome to VGCT</h1>
@@ -17,7 +18,8 @@ function HomePage() {
             <button type="button" className="btn btn-primary btn-lg px-4 gap-3">
               Register
             </button>
-            <button type="button" className="btn btn-outline-secondary btn-lg px-4">
+            <button type="button" className="btn btn-outline-secondary btn-lg px-4"
+            onClick="">
               Log in
             </button>
           </div>
