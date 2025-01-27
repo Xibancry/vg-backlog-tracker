@@ -31,7 +31,7 @@ function Header() {
                         </ul>
                         <div className="ms-auto">
                             <button type="button" className="btn btn-primary pe-3 me-2">Register</button>
-                            <button type="button" className="btn btn-secondary pe-3 me-2">Login</button>
+                            <button type="button" className="btn btn-secondary pe-3 me-2">Log in</button>
                         </div>
                     </div>
                 </div>
