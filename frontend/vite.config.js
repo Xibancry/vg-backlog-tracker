@@ -12,6 +12,6 @@ export default defineConfig({
     },
     watch: {
       usePolling: true  // Needed for Docker on some systems
-    }
-  }
+    },
+  },
 })
