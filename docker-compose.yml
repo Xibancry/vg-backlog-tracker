@@ -6,20 +6,44 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./backend:/app
-    ports:
-      - "8000:8000"
+    networks:
+      - app_network
     environment:
       - DEBUG=1
       - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+    expose:
+      - "8000"
 
   frontend:
     build: ./frontend
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    ports:
-      - "5173:5173"  # Vite uses port 5173 by default
+    networks:
+      - app_network  
     environment:
       - VITE_API_URL=http://localhost:8000
     depends_on:
       - backend
+    expose:
+      - "5173" # Vite uses port 5173 by default
+  
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"      # HTTP
+      - "443:443"    # HTTPS (if needed)
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/certs:/etc/nginx/certs:ro  # For SSL certificates if needed
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app_network
+    
+networks:
+  app_network:
+    driver: bridge
