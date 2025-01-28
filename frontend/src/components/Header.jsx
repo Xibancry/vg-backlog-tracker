@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
+    const navigate = useNavigate();
     return (
         <header className="sticky-top flex-wrap align-items-center justify-content-center justify-content-md-between border-bottom bg-light">
             {/* Navigation */}
@@ -20,7 +22,7 @@ function Header() {
                     <div className="collapse navbar-collapse ms-4 me-auto" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link active" href="/">Home</a>
+                                <Link className="nav-link active" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/about">Collection</a>
@@ -30,8 +32,12 @@ function Header() {
                             </li>
                         </ul>
                         <div className="ms-auto">
-                            <button type="button" className="btn btn-primary pe-3 me-2">Register</button>
-                            <button type="button" className="btn btn-secondary pe-3 me-2">Log in</button>
+                            <button type="button" className="btn btn-primary pe-3 me-2">
+                                Register
+                            </button>
+                            <button type="button" className="btn btn-secondary pe-3 me-2" onClick={() => navigate('LoginPage')}>
+                                Log in
+                            </button>
                         </div>
                     </div>
                 </div>

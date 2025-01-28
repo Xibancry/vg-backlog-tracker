@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-dom';
-import LoginPage from './LoginPage';
 
 
 function HomePage() {

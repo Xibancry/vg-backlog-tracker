@@ -23,7 +23,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="container">
+    <div className="container-fluid vw-100">
       <div className="row justify-content-center align-items-center min-vh-100">
         <div className="col-md-6 col-lg-4">
           <div className="card shadow-sm">
