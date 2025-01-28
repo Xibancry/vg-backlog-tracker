@@ -8,14 +8,15 @@ import Footer from './components/Footer.jsx';
 import LoginPage from './components/LoginPage.jsx';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import {BrowserRouter as Router, Route, Link, useNavigate, BrowserRouter } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, useNavigate, BrowserRouter, Routes } from 'react-router-dom';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>  
     <BrowserRouter>
-      <Header />
-      <HomePage />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<><Header /><HomePage /><Footer /></>} />
+        <Route path="/LoginPage" element={<LoginPage />} />
+      </Routes>
     </BrowserRouter>
   </StrictMode>,
 )

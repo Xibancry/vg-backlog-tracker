@@ -1,8 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-dom';
+import LoginPage from './LoginPage';
 
 
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <div id="HomePage" className="container-fluid py-5">
       {/* Hero Section */}
@@ -19,7 +21,7 @@ function HomePage() {
               Register
             </button>
             <button type="button" className="btn btn-outline-secondary btn-lg px-4"
-            onClick="">
+            onClick={() => navigate('LoginPage')}>
               Log in
             </button>
           </div>
