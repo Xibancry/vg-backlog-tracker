@@ -93,3 +93,6 @@ venv/
 
 # Static files
 static/
+
+# Migrations
+migrations/
