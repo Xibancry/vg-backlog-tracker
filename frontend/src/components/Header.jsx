@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, redirect } from 'react-router-dom';
 
 function Header() {
     const navigate = useNavigate();
@@ -32,12 +32,16 @@ function Header() {
                             </li>
                         </ul>
                         <div className="ms-auto">
-                            <button type="button" className="btn btn-primary pe-3 me-2">
-                                Register
-                            </button>
-                            <button type="button" className="btn btn-secondary pe-3 me-2" onClick={() => navigate('LoginPage')}>
-                                Log in
-                            </button>
+                            <Link to='/signup'>
+                                <button type="button" className="btn btn-primary pe-3 me-2" onClick={() => redirect('/signup')}>
+                                    Register
+                                </button>
+                            </Link>
+                            <Link to='/LoginPage'>
+                                <button type="button" className="btn btn-secondary pe-3 me-2" onClick={() => navigate('LoginPage')}>
+                                    Log in
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
