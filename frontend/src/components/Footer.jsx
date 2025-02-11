@@ -1,21 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
-        <footer className="py-3 my-4">
-            {/* Footer */}
-            <ul className="nav justify-content-center border-bottom pb-3 mb-3">
-                <li className="nav-item">
-                    <a href="/" className="nav-link px-2 text-muted">Home</a>
-                </li>
-                <li className="nav-item">
-                    <a href="/about" className="nav-link px-2 text-muted">About</a>
-                </li>
-                <li className="nav-item">
-                    <a href="/contact" className="nav-link px-2 text-muted">Contact</a>
-                </li>
-            </ul>
-            <p className="text-center text-muted">© 2025 Your Company, Inc</p>
+        <footer className="bg-white">
+            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                <nav className="flex flex-wrap justify-center space-x-6">
+                    <Link to="/" className="text-gray-500 hover:text-gray-900">
+                        Home
+                    </Link>
+                    <Link to="/about" className="text-gray-500 hover:text-gray-900">
+                        About
+                    </Link>
+                    <Link to="/contact" className="text-gray-500 hover:text-gray-900">
+                        Contact
+                    </Link>
+                </nav>
+                <p className="mt-8 text-center text-gray-400">
+                    © 2025 Your Company, Inc. All rights reserved.
+                </p>
+            </div>
         </footer>
     );
 }

@@ -23,150 +23,147 @@ const SignUpPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    // Basic validation
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords don't match");
       return;
     }
-
-    try {
-      console.log('Submitting form data:', formData);
-      // Add your registration logic here
-    } catch (err) {
-      setError(err.message);
-    }
+    console.log('Form submitted:', formData);
   };
 
   return (
-    <div className="vh-100 vw-100 bg-light">
-      <div className="container-fluid h-100">
-        <div className="row h-100">
-          {/* Left side - Sign Up Form */}
-          <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-            <div className="w-75">
-              <div className="card border-0 shadow-sm">
-                <div className="card-body p-5">
-                  {/* Header */}
-                  <div className="text-center mb-4">
-                    <h4 className="card-title mb-2">Create an Account</h4>
-                    <p className="text-muted">Join our community today</p>
-                  </div>
+    <div className="min-h-screen min-w-screen bg-gray-50">
+      <div className="flex min-h-screen">
+        {/* Left side - Sign Up Form */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="max-w-md w-full px-6">
+            <div className="bg-white py-8 px-6 shadow rounded-lg">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900">Create an Account</h2>
+                <p className="text-sm text-gray-500 mt-2">
+                  Join our community today
+                </p>
+              </div>
 
-                  {/* Error Display */}
-                  {error && (
-                    <div className="alert alert-danger" role="alert">
-                      {error}
-                    </div>
-                  )}
-
-                  {/* Sign Up Form */}
-                  <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                      <label htmlFor="nickname" className="form-label">
-                        Nickname
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="nickname"
-                        name="nickname"
-                        value={formData.nickname}
-                        onChange={handleChange}
-                        placeholder="Choose a nickname"
-                        required
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label htmlFor="email" className="form-label">
-                        Email address
-                      </label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Enter your email"
-                        required
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label htmlFor="dateOfBirth" className="form-label">
-                        Date of Birth
-                      </label>
-                      <input
-                        type="date"
-                        className="form-control"
-                        id="dateOfBirth"
-                        name="dateOfBirth"
-                        value={formData.dateOfBirth}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label htmlFor="password" className="form-label">
-                        Password
-                      </label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        placeholder="Create a password"
-                        required
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label htmlFor="confirmPassword" className="form-label">
-                        Confirm Password
-                      </label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        placeholder="Confirm your password"
-                        required
-                      />
-                    </div>
-
-                    <div className="d-grid">
-                      <button type="submit" className="btn btn-primary">
-                        Create Account
-                      </button>
-                    </div>
-                  </form>
-
-                  {/* Login link */}
-                  <div className="text-center mt-4">
-                    <p className="mb-0">
-                      Already have an account?{' '}
-                      <Link to="/login" className="text-decoration-none">
-                        Sign in
-                      </Link>
-                    </p>
-                  </div>
+              {error && (
+                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                  {error}
                 </div>
+              )}
+
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div>
+                  <label htmlFor="nickname" className="block text-sm font-medium text-gray-700">
+                    Nickname
+                  </label>
+                  <input
+                    id="nickname"
+                    name="nickname"
+                    type="text"
+                    required
+                    value={formData.nickname}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="Choose a nickname"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    Email address
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="Enter your email"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700">
+                    Date of Birth
+                  </label>
+                  <input
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    type="date"
+                    required
+                    value={formData.dateOfBirth}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="Create a password"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                    Confirm Password
+                  </label>
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    required
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="Confirm your password"
+                  />
+                </div>
+
+                <div>
+                  <button
+                    type="submit"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Create Account
+                  </button>
+                </div>
+              </form>
+
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-500">
+                  Already have an account?{' '}
+                  <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+                    Sign in
+                  </Link>
+                </p>
               </div>
             </div>
-          </div>
 
-          {/* Right side - Background or Image */}
-          <div className="col-md-6 bg-primary d-none d-md-flex align-items-center justify-content-center">
-            <div className="text-white text-center">
-              <h2>Join Our Community</h2>
-              <p className="lead">Create an account to get started</p>
+            <div className="mt-4 text-center">
+              <Link to="/" className="text-sm text-gray-500 hover:text-gray-900">
+                ← Back to home
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Right side - Decorative */}
+        <div className="hidden lg:block relative flex-1 bg-indigo-600">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center text-white">
+              <h2 className="text-4xl font-bold">Join Our Community</h2>
+              <p className="mt-4 text-lg">Create an account to get started</p>
             </div>
           </div>
         </div>
