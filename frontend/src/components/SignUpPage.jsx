@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
-    nickname: '',
+    username: '',
     email: '',
-    dateOfBirth: '',
+    date_of_birth: '',
     password: '',
     confirmPassword: ''
   });
@@ -27,7 +27,15 @@ const SignUpPage = () => {
       setError("Passwords don't match");
       return;
     }
+    const response = fetch('http://localhost/api/db/usercreationtest', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({formData})
+    })
     console.log('Form submitted:', formData);
+    console.log(response);
   };
 
   return (
@@ -52,18 +60,18 @@ const SignUpPage = () => {
 
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
-                  <label htmlFor="nickname" className="block text-sm font-medium text-gray-700">
-                    Nickname
+                  <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                    Username
                   </label>
                   <input
-                    id="nickname"
-                    name="nickname"
+                    id="username"
+                    name="username"
                     type="text"
                     required
-                    value={formData.nickname}
+                    value={formData.username}
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="Choose a nickname"
+                    className="text-gray-700 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="Choose a username"
                   />
                 </div>
 
@@ -78,7 +86,7 @@ const SignUpPage = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="text-gray-700 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -94,7 +102,7 @@ const SignUpPage = () => {
                     required
                     value={formData.dateOfBirth}
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="text-gray-700 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
 
@@ -109,7 +117,7 @@ const SignUpPage = () => {
                     required
                     value={formData.password}
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="text-gray-700 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="Create a password"
                   />
                 </div>
@@ -125,7 +133,7 @@ const SignUpPage = () => {
                     required
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    className="text-gray-700 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="Confirm your password"
                   />
                 </div>
