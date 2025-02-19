@@ -32,9 +32,10 @@ const SignUpPage = () => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({formData})
+      body: JSON.stringify(formData)
     })
     console.log('Form submitted:', formData);
+    console.log(JSON.stringify(formData));
     console.log(response);
   };
 
@@ -92,15 +93,15 @@ const SignUpPage = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="date_of_birth" className="block text-sm font-medium text-gray-700">
                     Date of Birth
                   </label>
                   <input
-                    id="dateOfBirth"
-                    name="dateOfBirth"
+                    id="date_of_birth"
+                    name="date_of_birth"
                     type="date"
                     required
-                    value={formData.dateOfBirth}
+                    value={formData.date_of_birth}
                     onChange={handleChange}
                     className="text-gray-700 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />

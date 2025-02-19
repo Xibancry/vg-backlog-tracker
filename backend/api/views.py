@@ -1,6 +1,7 @@
+import json
 from django.shortcuts import render
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, RegisterSerializer
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -65,12 +66,15 @@ class UserDelete(generics.RetrieveDestroyAPIView):
 class UserRegister(APIView):
     # API endpoint that allows to create users and issuing tokens
     permission_classes = [AllowAny]
+    #serializer_class = UserSerializer
     
     def post(self, request):
-        username = request.data.get('username')
-        email = request.data.get('email')
-        password = request.data.get('password')
-        date_of_birth = request.data.get('date_of_birth')
+        request_data = json.loads(request.body)
+    
+        username = request_data.get('username')
+        email = request_data.get('email')
+        password = request_data.get('password')
+        date_of_birth = request_data.get('date_of_birth')
         
         #Check for empty fields
         if not username or not email or not password:
@@ -83,7 +87,7 @@ class UserRegister(APIView):
             return Response({
                 'error': 'Username already exists'
             }, status=status.HTTP_400_BAD_REQUEST)
-            
+        
         #Check if email exists
         if User.objects.filter(email=email).exists():
             return Response({
