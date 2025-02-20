@@ -11,3 +11,7 @@ VGCT runs on Docker containers set up using docker-compose. Make sure to have [D
 The project should be running on [your localhost](http://localhost/).
 
 If you are using WSL, make sure you have your distro listed on Window's hosts file or use a browser from the WSL itself to access the page.
+
+## Current features
+VGCT currently supports the following features
+- Sign Up and Login using JWT tokens stored as HttpOnly cookies
