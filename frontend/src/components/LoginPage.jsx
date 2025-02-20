@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Router, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -16,8 +16,32 @@ const LoginPage = () => {
     }));
   };
 
+  const handleRedirect = useNavigate();
+
+  const login = async (credentials) => {
+    try {
+      const response = await fetch('http://localhost/api/db/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+        credentials: 'include' // Include cookies
+      });
+
+      if (response.ok) {
+        // JWT stored as HttpOnly cookie
+        handleRedirect("/");
+        return await response.json();
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    login(formData);
     console.log('Form submitted:', formData);
   };
 

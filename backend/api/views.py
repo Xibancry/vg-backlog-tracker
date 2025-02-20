@@ -1,5 +1,7 @@
 import json
 from django.shortcuts import render
+from django.middleware import csrf
+from config import settings
 from .models import User
 from .serializers import UserSerializer, RegisterSerializer
 from rest_framework import generics, status
@@ -70,7 +72,7 @@ class UserRegister(APIView):
     
     def post(self, request):
         request_data = json.loads(request.body)
-    
+        response = Response()
         username = request_data.get('username')
         email = request_data.get('email')
         password = request_data.get('password')
@@ -105,8 +107,54 @@ class UserRegister(APIView):
         #Generate token
         refresh = RefreshToken.for_user(user)
         
+        #Generate csrf cookie with token
+        response.set_cookie(
+            key = settings.SIMPLE_JWT['AUTH_COOKIE'],
+            value = str(refresh.access_token),
+            expires = settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
+            secure = settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+            httponly = settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+            samesite = settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
+        )
+        
+        csrf.get_token(request)
+        
         return Response({
             'message': 'User registered successfully',
             'refresh': str(refresh),
             'access': str(refresh.access_token)
-        }, status=status.HTTP_201_CREATED)
+        }, status=status.HTTP_200_OK)
+        
+class UserLogin(APIView):
+    permission_classes = [AllowAny]
+    
+    def post(self, request):
+        request_data = json.loads(request.body)
+        
+        email = request_data.get('email')
+        password = request_data.get('password')
+        
+        #Check user credentials
+        if User.objects.filter(email=email).filter(password=password).exists():
+            user = User.objects.get(email=email)
+            refresh = RefreshToken.for_user(user)
+            
+            response = Response({
+                'message': 'User logged in successfully',
+                'user_id': user.id
+            }, status=status.HTTP_200_OK)
+            
+            response.set_cookie(
+                key = settings.SIMPLE_JWT['AUTH_COOKIE'],
+                value = str(refresh.access_token),
+                expires = settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
+                secure = settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+                httponly = settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+                samesite = settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
+            )
+            
+            return response
+        else:
+            return Response({
+                'error': "User doesn't exists or password is incorrect"
+            }, status=status.HTTP_404_NOT_FOUND)

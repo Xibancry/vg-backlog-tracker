@@ -1,12 +1,13 @@
 from django.urls import path
-from .views import TestView, UserCreate, UserView, UserDetail, UserUpdate, UserDelete, UserRegister
+from .views import TestView, UserCreate, UserView, UserDetail, UserUpdate, UserDelete, UserRegister, UserLogin
 from rest_framework_simplejwt import views as jwt_views
 
 #Create urls here
 urlpatterns = [
     path('test/', TestView.as_view(), name='test'),
     path('db/usercreate', UserCreate.as_view(), name='create-user'),
-    path('db/usercreationtest', UserRegister.as_view(), name='create-user-test'),
+    path('db/signup', UserRegister.as_view(), name='signup'),
+    path('db/login', UserLogin.as_view(), name='login'),
     path('db/userview', UserView.as_view(), name='view-users'),
     path('db/userdetail/<int:pk>', UserDetail.as_view(), name='retrieve-user'),
     path('db/userupdate/<int:pk>', UserUpdate.as_view(), name='update-user'),

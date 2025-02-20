@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Router, useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -21,22 +21,48 @@ const SignUpPage = () => {
     setError(null);
   };
 
-  const handleSubmit = (event) => {
+  const handleRedirect = useNavigate();
+
+  const login = async (credentials) => {
+    try {
+      const response = await fetch('http://localhost/api/db/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+        credentials: 'include' // Include cookies
+      });
+
+      if (response.ok) {
+        // JWT stored as HttpOnly cookie
+        handleRedirect("/");
+        return await response.json();
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+    }
+  };
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords don't match");
       return;
     }
-    const response = fetch('http://localhost/api/db/usercreationtest', {
+    const response = await fetch('http://localhost/api/db/signup', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(formData)
     })
-    console.log('Form submitted:', formData);
-    console.log(JSON.stringify(formData));
+    //console.log('Form submitted:', formData);
+    //console.log(JSON.stringify(formData));
     console.log(response);
+    if (response.ok) {
+      login(formData);
+    }
   };
 
   return (
